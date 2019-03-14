@@ -1,0 +1,95 @@
+body
+{
+    background-image: url("/images/paperbackground.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.navbar
+{
+    height: 85px;
+}
+.jumbotron
+{
+    background-image: url("/images/bookandcoffee.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 275px;
+}
+
+#jumbotronToptext, #jumbotronPtext
+{
+    font-family: 'Merienda One', cursive;
+    color: white;
+}
+
+.card-header
+{
+    background-color: #007BFF;
+}
+
+.noArticlesCard
+{
+    color: white;
+    font-weight: bold;
+    background-color: #FF9800;
+    text-align: center;
+}
+
+.whatToDo
+{
+    color: white;
+    font-weight: bold;
+    background-color: #007BFF;
+    text-align: center;
+}
+
+.center
+{
+    text-align: center;
+}
+
+a:link, a:visited
+{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+
+}
+
+a:hover, a:active
+{
+    color: white;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.linkformat:link, .linkformat:visited
+{
+    color: #2196F3;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.linkformat:hover, .linkformat:active
+{
+    color: #2196F3;
+    text-decoration: underline;
+    font-weight: bold;
+    
+}
+
+.cardHeaderButton
+{
+    float: right;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color:#007BFF;
+    color: white;
+    text-align: left;
+  }
