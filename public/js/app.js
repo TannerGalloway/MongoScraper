@@ -132,7 +132,7 @@ $(document).ready(function()
         $.get("/savedArticleNotes/" + this.id, function(data)
         {
             var noteContent = $("<p>").text(JSON.stringify(data.note.body));
-            var noteDeleteButton = $("<button>").addClass("btn btn-danger cardHeaderButton noteDeleteButton").attr({"href": "#", "id" : data.note._id}).text("X");
+            var noteDeleteButton = $("<button>").addClass("btn btn-danger cardHeaderButton noteDeleteButton").attr("id", data.note._id).text("X");
             $("#notes").append(noteContent).append(noteDeleteButton);
         }).catch(function(err)
         {
@@ -142,11 +142,6 @@ $(document).ready(function()
                 $("#notes").append(noNotes);
             };
         });
-    });
-
-    $(".noteDeleteButton").on("click", function(event)
-    {
-        event.preventDefault();
     });
 
     // creates cards for saved articles

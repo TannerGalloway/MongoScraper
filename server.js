@@ -3,8 +3,6 @@ var express = require("express");
 var mongoose = require("mongoose");
 var exphbs = require("express-handlebars");
 // Require axios and cheerio. This makes the scraping possible
-// var axios = require("axios");
-// var cheerio = require("cheerio");
 var routes = require("./routes/htmlRoutes");
 
 // Initialize Express
@@ -23,8 +21,10 @@ app.use(express.static("public"));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraper";
+
 // connect to mongo database
-mongoose.connect("mongodb://localhost/scraper", { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 // routes
 app.use(routes);

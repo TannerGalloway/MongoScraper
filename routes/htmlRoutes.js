@@ -111,13 +111,4 @@ router.post("/addNote/:id", function(req, res)
   });
 });
 
-
-router.delete("/deleteNote/:id", function(req, res)
-{
-  db.Note.find({_id: req.params.id}).remove(function(data)
-  {
-    res.json(data);
-  });
-});
-
 module.exports = router;
