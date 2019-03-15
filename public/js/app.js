@@ -13,7 +13,7 @@ $(document).ready(function()
             var headerLink = $("<a>").attr("href", element.link).text(element.title);
             var savebutton = $("<button>").addClass("btn btn-success cardHeaderButton savebutton").attr({"href": "#", "id" : element._id}).text("Save Article");
             var cardBody = $("<div>").addClass("card-body");
-            var cardParagraph  = $("<p>").addClass("card-text").text("This is a sumarry of the article");
+            var cardParagraph  = $("<p>").addClass("card-text").text("No Summary for the Article found");
             $(cardHeader).append(headerLink).append(savebutton);
             $(card).append(cardHeader);
             $(cardBody).append(cardParagraph);
@@ -114,13 +114,18 @@ $(document).ready(function()
             }
         }).then(function(data)
         {
-            console.log(data);
+
         });
     });
 
     $(document).on("click", ".articleNotesButton", function(event)
     {
         event.preventDefault();
+
+        $.get("/savedArticlesNotes/" + this.id, function(data)
+        {
+            $(".modal-title").text("Notes for " + '"' + data.title + '"' + "Article");
+        });
     });
 
     // creates cards for saved articles
@@ -137,9 +142,9 @@ $(document).ready(function()
                     var cardHeader = $("<div>").addClass("card-header");
                     var headerLink = $("<a>").attr("href", element.link).text(element.title);
                     var deletebutton = $("<button>").addClass("btn btn-danger cardHeaderButton deleteButton").attr({"href": "#", "id" : element._id}).text("Delete From Saved");
-                    var articleNotes = $("<button>").addClass("btn btn-info cardHeaderButton articleNotesButton ").attr({"href": "#", "id" : element._id}).text("Article Notes");
+                    var articleNotes = $("<button>").addClass("btn btn-info cardHeaderButton articleNotesButton ").attr({"href": "#", "id" : element._id, "data-toggle" : "modal", "data-target" : "#ArticleNotes"}).text("Article Notes");
                     var cardBody = $("<div>").addClass("card-body");
-                    var cardParagraph  = $("<p>").addClass("card-text").text("This is a sumarry of the article");
+                    var cardParagraph  = $("<p>").addClass("card-text").text("No Summary for the Article found");
                     $(cardHeader).append(headerLink).append(articleNotes).append(" ").append(deletebutton);
                     $(card).append(cardHeader);
                     $(cardBody).append(cardParagraph);

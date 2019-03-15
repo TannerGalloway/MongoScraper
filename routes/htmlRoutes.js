@@ -69,6 +69,15 @@ router.get("/savedArticles", function(req, res)
   });
 });
 
+router.get("/savedArticlesNotes/:id", function(req, res)
+{
+  db.Article.findById(req.params.id, "title", function(err, data)
+  {
+    if(err) throw err;
+    res.json(data);
+  });
+});
+
 router.put("/updateAll", function(req, res)
 {
   db.Article.updateMany({}, req.body, function(updateData)

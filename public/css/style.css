@@ -84,7 +84,8 @@ a:hover, a:active
     float: right;
 }
 
-.footer {
+.footer 
+{
     position: fixed;
     left: 0;
     bottom: 0;
@@ -92,4 +93,9 @@ a:hover, a:active
     background-color:#007BFF;
     color: white;
     text-align: left;
-  }
+}
+
+textarea 
+{
+    resize: none;
+}
