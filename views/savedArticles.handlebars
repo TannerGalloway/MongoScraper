@@ -11,7 +11,7 @@
                 <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/savedArticles">Saved Articles</a>
+                <a class="nav-link" href="/savedArticlesPage">Saved Articles</a>
             </li>
             <li>
                 <button type="button" id="clearArticleButtonSaved" class="btn btn-danger">Clear Articles</button>
@@ -23,7 +23,7 @@
 <div class="jumbotron jumbotron-fluid text-center">
     <div class="container">
         <h1 class="display-4" id="jumbotronToptext">Saved Articles
-            <p class="lead" id="jumbotronPtext">Your Saved Articles</p>
+            <p class="lead" id="jumbotrontext">Your Saved Articles</p>
     </div>
 </div>
 
@@ -54,21 +54,22 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" id="closeX" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="noteTitle" placeholder="Title">
+                        <div id="notes"></div>
+                        <input type="text" class="form-control" id="noteTitle" placeholder="Note Title">
                         <br>
-                        <textarea rows="4" cols="50" placeholder="Note Body" id="noteBody"></textarea>
+                        <textarea rows="4" cols="50" id="noteBody" placeholder="Note Body"></textarea>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-info" id="saveNote" data-dismiss="modal">Save Note</button>
             </div>
         </div>
     </div>

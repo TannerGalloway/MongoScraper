@@ -69,7 +69,7 @@ router.get("/savedArticles", function(req, res)
   });
 });
 
-router.get("/savedArticlesNotes/:id", function(req, res)
+router.get("/savedArticleTitle/:id", function(req, res)
 {
   db.Article.findById(req.params.id, "title", function(err, data)
   {
@@ -78,11 +78,45 @@ router.get("/savedArticlesNotes/:id", function(req, res)
   });
 });
 
+router.get("/savedArticleNotes/:id", function(req, res)
+{
+  db.Article.findOne({_id: req.params.id}).populate("note").then(function(dbNote)
+  {
+    res.json(dbNote);
+  }).catch(function(err)
+  {
+    res.json(err);
+  });
+});
+
 router.put("/updateAll", function(req, res)
 {
   db.Article.updateMany({}, req.body, function(updateData)
   {
     res.json(updateData);
+  });
+});
+
+router.post("/addNote/:id", function(req, res)
+{ 
+  db.Note.create(req.body).then(function(dbNote)
+  {
+    return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+  }).then(function(dbArticle)
+  {
+    res.json(dbArticle);
+  }).catch(function(err)
+  {
+    res.json(err);
+  });
+});
+
+
+router.delete("/deleteNote/:id", function(req, res)
+{
+  db.Note.find({_id: req.params.id}).remove(function(data)
+  {
+    res.json(data);
   });
 });
 

@@ -1,5 +1,6 @@
 $(document).ready(function()
 {
+    var articleID;
     $("#scrapeAtricleButton").on("click", function(event)
     {
         event.preventDefault();
@@ -97,7 +98,7 @@ $(document).ready(function()
             }
         }).then(function(data)
         {
-            console.log(data);
+
         });
     });
 
@@ -114,18 +115,38 @@ $(document).ready(function()
             }
         }).then(function(data)
         {
-
+        
         });
     });
 
     $(document).on("click", ".articleNotesButton", function(event)
     {
         event.preventDefault();
-
-        $.get("/savedArticlesNotes/" + this.id, function(data)
+        articleID = this.id;
+    
+        $.get("/savedArticleTitle/" + this.id, function(data)
         {
             $(".modal-title").text("Notes for " + '"' + data.title + '"' + "Article");
         });
+
+        $.get("/savedArticleNotes/" + this.id, function(data)
+        {
+            var noteContent = $("<p>").text(JSON.stringify(data.note.body));
+            var noteDeleteButton = $("<button>").addClass("btn btn-danger cardHeaderButton noteDeleteButton").attr({"href": "#", "id" : data.note._id}).text("X");
+            $("#notes").append(noteContent).append(noteDeleteButton);
+        }).catch(function(err)
+        {
+            if(err)
+            {
+                var noNotes = $("<p>").text("no Notes found");
+                $("#notes").append(noNotes);
+            };
+        });
+    });
+
+    $(".noteDeleteButton").on("click", function(event)
+    {
+        event.preventDefault();
     });
 
     // creates cards for saved articles
@@ -153,5 +174,32 @@ $(document).ready(function()
                 });
         });
         
+    });
+
+    $(document).on("click", "#saveNote", function(event)
+    {
+        event.preventDefault();
+
+        $.ajax({
+            method: "POST",
+            url: "/addNote/" + articleID,
+            data: {
+              // Value taken from title input
+              title: $("#noteTitle").val().trim(),
+              // Value taken from note textarea
+              body: $("#noteBody").val().trim()
+            }
+          }).then(function(articleNote) {
+              console.log(articleNote);
+            });
+
+            $("#noteTitle").val("");
+            $("#noteBody").val("");
+    });
+
+    $("#closeX").on("click", function(event)
+    {
+        event.preventDefault();
+        $("#notes").empty();
     });
 });
